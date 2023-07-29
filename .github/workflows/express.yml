@@ -7,6 +7,8 @@ on:
 
 env:
   AWS_REGION: "ap-southeast-1"
+  TEST_TAG: shrempf/express-docker:test
+  LATEST_TAG: shrempf/express-docker:latest
 
 permissions:
   id-token: write
@@ -34,17 +36,17 @@ jobs:
         with:
           file: Dockerfile.dev
           load: true
-          tags: shrempf/express-docker:test
+          tags: ${{ env.TEST_TAG }}
 
       - name: Test
         run: |
-          docker run --rm shrempf/express-docker:test
+          docker run --rm ${{ env.TEST_TAG }}
 
       - name: Publish
         uses: docker/build-push-action@v4
         with:
           push: true
-          tags: shrempf/express-docker:latest
+          tags: ${{ env.LATEST_TAG }}
 
       - name: Configure AWS credentials
         uses: aws-actions/configure-aws-credentials@v2.2.0
