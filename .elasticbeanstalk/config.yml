@@ -2,6 +2,8 @@ branch-defaults:
   default:
     environment: null
     group_suffix: null
+  master:
+    environment: express-elastic-dev
 global:
   application_name: express-elastic
   branch: null
