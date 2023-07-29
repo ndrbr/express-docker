@@ -5,8 +5,8 @@ RUN mkdir -p /home/node/app
 
 WORKDIR '/home/node/app'
 
-COPY --chown=node:node ./package.json ./
-RUN npm install --omit=dev
+COPY --chown=node:node ./package.json ./package-lock.json ./
+RUN npm ci --production
 
 COPY --chown=node:node ./ ./
 
